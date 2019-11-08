@@ -70,41 +70,37 @@ class _HomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final count = widget.count;
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
-      ),
-      body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text('按下按钮加一'),
-            new Text(
-              '$count',
-              style: Theme.of(context).textTheme.display1,
-            ),
-            new Text('按下按钮减一'),
-            new Text(
-              '$_minCounter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-            new FloatingActionButton(
-              heroTag: 'btn1',
-              onPressed: _handleMinCounter,
-              child: Icon(Icons.remove),
-            ),
-            new FloatingActionButton(
-              heroTag: 'btn2',
-              onPressed: _handleRoute,
-              child: Icon(Icons.add_circle),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: new FloatingActionButton(
-        heroTag: 'btn3',
-        onPressed: _handleIncreaseNum,
-        child: new Icon(Icons.add),
+    return new Container(
+      alignment: Alignment.center,
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text('按下按钮加一'),
+          new Text(
+            '$count',
+            style: Theme.of(context).textTheme.display1,
+          ),
+          new Text('按下按钮减一'),
+          new Text(
+            '$_minCounter',
+            style: Theme.of(context).textTheme.display1,
+          ),
+          new FloatingActionButton(
+            heroTag: 'btn1',
+            onPressed: _handleMinCounter,
+            child: Icon(Icons.remove),
+          ),
+          new FloatingActionButton(
+            heroTag: 'btn3',
+            onPressed: _handleIncreaseNum,
+            child: new Icon(Icons.add),
+          ),
+          new FloatingActionButton(
+            heroTag: 'btn2',
+            onPressed: _handleRoute,
+            child: Icon(Icons.add_circle),
+          ),
+        ],
       ),
     );
   }

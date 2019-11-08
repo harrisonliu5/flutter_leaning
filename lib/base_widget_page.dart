@@ -1,5 +1,24 @@
 import 'package:flutter/material.dart';
 
+class BaseWidgetPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        children: <Widget>[
+          TextPage(),
+          TextSpanPage(),
+          DefaultTextStylePage(),
+          CustomButton(),
+          ImageNetworkPage(),
+          ImagePage(),
+        ],
+      ),
+    );
+  }
+}
+
 class TextPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -88,12 +107,18 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-final ImageNetworkPage = () => Image.network(
+class ImageNetworkPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
       "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4",
       width: 100.0,
       color: Colors.blue,
       colorBlendMode: BlendMode.difference,
     );
+    ;
+  }
+}
 
 class ImagePage extends StatelessWidget {
   @override

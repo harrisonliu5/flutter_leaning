@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class Layout_Row_Page extends StatelessWidget {
   @override
@@ -168,3 +169,77 @@ class Layout_ConstrainedBox_Page extends StatelessWidget {
     );
   }
 }
+
+// UnconstrainedBox 用来清除父组件的限制，只不过不影响最终子元素的大小，但是父组件任然占有相应的空间
+// 而且不能在不改变父组件代码的情况下彻底去掉 父 ConstrainedBox 的限制。
+
+class Layout_DecorateBox_Page extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      // decoration: BoxDecoration(
+      //   gradient: LinearGradient(
+      //     colors: [
+      //       Colors.red,
+      //       Colors.orange[700],
+      //     ],
+      //   ),
+      //   borderRadius: BorderRadius.circular(3.0),
+      //   boxShadow: [
+      //     BoxShadow(
+      //       color: Colors.black54,
+      //       offset: Offset(2.0, 2.0),
+      //       blurRadius: 4.0,
+      //     )
+      //   ],
+      // ),
+      decoration: BoxDecoration(
+        gradient: SweepGradient(
+          center: FractionalOffset.center,
+          startAngle: 0.0,
+          endAngle: math.pi * 2,
+          colors: const <Color>[
+            Color(0xFF4285F4), // blue
+            Color(0xFF34A853), // green
+            Color(0xFFFBBC05), // yellow
+            Color(0xFFEA4335), // red
+            Color(
+                0xFF4285F4), // blue again to seamlessly transition to the start
+          ],
+          stops: const <double>[0.0, 0.25, 0.5, 0.75, 1.0],
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 80.0, horizontal: 18.0),
+        child: Text(
+          "Login",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+
+// Transform 是在绘制阶段，而并不是应用在布局(layout)阶段，所以无论对子组件应用何种变化，其占用空间的大小和在屏幕上的位置都是固定不变的，因为这些是在布局阶段就确定的。
+//RotatedBox 的变化在 layout阶段，会影响组件的位置和大小
+
+class Transform_Page extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        DecoratedBox(
+            decoration: BoxDecoration(color: Colors.red),
+            child: Transform.scale(scale: 1.5, child: Text("Hello world"))),
+        Text(
+          "你好",
+          style: TextStyle(color: Colors.green, fontSize: 18.0),
+        )
+      ],
+    );
+  }
+}
+
+// Container 是一个多功能的容器包含DecoratedBox、ConstrainedBox、Transform、Padding、Align等
+// 宽高以width和height优先

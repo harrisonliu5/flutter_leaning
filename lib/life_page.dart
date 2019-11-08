@@ -24,11 +24,14 @@ class _LifePageState extends State<LifePage> {
   @override
   Widget build(BuildContext context) {
     print('build');
+    ThemeData themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Life Page'),
+        backgroundColor: themeData.primaryColor,
       ),
       body: Container(
+        alignment: Alignment.center,
         child: Column(
           children: <Widget>[
             FlatButton(
@@ -44,8 +47,11 @@ class _LifePageState extends State<LifePage> {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        child: Text('跳转到表单'),
+        child: Text(
+          '跳转到表单',
+        ),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
             return FormPage();
